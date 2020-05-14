@@ -15,7 +15,13 @@ Fenchone has two stereocenters, e.g., 2 Diastereomers could be distinguished usi
 1. [C@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
 2. [C@@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
 
-First, we generate the 3D input coordinates using the script 
+First, we generate the 3D input coordinates using the script conformer_rdkit.py, which creates possible 3D coordinates for each compound. It can be called via 
+```
+python conformer_rdkit.py [C@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
+```
+and will create one conformer for each diastereomere (since Fenchone is rigid).
+We notice that the compounds are filtered via an heavy atom filtering, i.e. hydrogen atoms are not considered. For compounds, which have an hydroxyl group, we recommend to consider the Hydrogen atom.
+
 ```
 import os
 import subprocess
@@ -31,8 +37,7 @@ def get_conformer_energies(forcefield, mol,id):
     energy = ff.CalcEnergy()
     return energy
 
-fopen=open("smiles","r")
-smiles=fopen.readline().split()[0]
+smiles = sys.argv[1]
 mol = Chem.MolFromSmiles(smiles)
 mol = Chem.AddHs(mol)
 ids = AllChem.EmbedMultipleConfs(mol,numConfs=5,pruneRmsThresh=0.001,randomSeed=42,numThreads=1,enforceChirality=True,useExpTorsionAnglePrefs=True,useBasicKnowledge=True) 
@@ -48,7 +53,7 @@ for id2 in range(0,len(rms_clusters)):
     for i in range(len(coord)):
         l = mol.GetAtomWidthIdx(i).GetSymbol()
         f.write(l+" "+str(coord[i][0])+" "+str(coord[i][1])+" "+str(coord[i][2])+"\n")
-    f.close()conformer_rdkit.py
+    f.close()
 ```
 
 
