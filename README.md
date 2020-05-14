@@ -68,7 +68,12 @@ For the QM calculation, we will use the file ``0.inp``,
 , which uses the RI-BP86/def2-SVP level of theory with a dispersion correction (D3BJ) to perform the optimization and the frequency computation.
 We will start the computation with
 ``` orca "0.inp > 0.out"```
-, and the results will be stored in the 0.hess (Hessian), 0.engrad (gradient and energy) and 0.out (the output-log file)
+, and the results will be stored in the 0.hess (Hessian), 0.engrad (gradient and energy) and 0.out (the output-log) files.
+We notice that most of the computations require multiple CPUs to be feasible. In such case you need to specifiy the number of processors avaible (via ```%pal nprocs N```) and the memory available per processor (via ```%Mem N```) to speed up things considerable, and run the mpi-version of orca. 
+
+## Generating the input files for the alignment algorithm
+
+
 
 
 
