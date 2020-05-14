@@ -10,7 +10,7 @@ The files for this tutorial can be found in the folder example. As a conformer s
 ## First Considerations
 For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward, and give satisfactory results. The results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend BP86 functional with a triple zeta basis set (e.g. def2-tzvp, or cc-pVTZ) and a dispersion correction (e.g. Grimme's Dispersion correction with Becke Johnson damping). The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. To reduce the cost for flexible compounds, we thus recommend to lower the quality of the basis set (e.g. to def2-SVP). The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
 
-## Input files
+## Generation of 3D Coordinates
 Fenchone has two stereocenters, e.g., 2 Diastereomers could be distinguished using IR (the other isomers are entantiomers, i.e. they would require VCD to be detected). The smiles strings are:
 1. [C@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
 2. [C@@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
@@ -48,15 +48,27 @@ num = mol.GetNumConformers()
 rms_clusters = Butina.ClusterData(rmsmat, num, 1, isDistData=True, reordering=True)
 for id2 in range(0,len(rms_clusters)):
     coord = mol.GetConformers()[id2].GetPositions()
-    f = open(str(id2)+".xyz","w+")
+    f = open(str(id2)+"_unopt.xyz","w+")
     f.write(len(coord)+"\n"+str(id2)+"\n")
     for i in range(len(coord)):
         l = mol.GetAtomWidthIdx(i).GetSymbol()
         f.write(l+" "+str(coord[i][0])+" "+str(coord[i][1])+" "+str(coord[i][2])+"\n")
     f.close()
 ```
+The script writes out .xyz files for each conformer found. We will use these coordinates as input files for the QM calculations.
 
+## QM Computation
 
+For the QM calculation, we will use the file ``0.inp``,
+```
+!RI BP86 def2-SVP D3BJ TightOpt TightSCF freq Grid5 FinalGrad6
+
+* 0 1 xyzfile 0_unopt.xyz
+```
+, which uses the RI-BP86/def2-SVP level of theory with a dispersion correction (D3BJ) to perform the optimization and the frequency computation.
+We will start the computation with
+``` orca "0.inp > 0.out"```
+, and the results will be stored in the 0.hess (Hessian), 0.engrad (gradient and energy) and 0.out (the output-log file)
 
 
 
