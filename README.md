@@ -1,14 +1,14 @@
 ## irsa
 This reposetory contains two projects:
-First, the IRSA project, which is a command line program to align theoretical IR/VCD to experimental spectra.
-Second, the IRSA_GUI project, which provides a graphical user interface.
+First, the IRSA project, which is a command line program to align theoretical IR/VCD to experimental spectra. This is particular useful if one is interested in scanning automatically large data basis.
+Second, the IRSA_GUI project, which provides a graphical user interface. This is particular useful if one is interested in an exact determination of the (absolute) stereochemistry.
 
 
 ## Tutorial
 The files for this tutorial can be found in the folder example. As a conformer sampler, we will use RDKit, and for the quantum mechanical frequency computations, we will use orca 4.2.0, since both programs are free of charge. Any other QM program (e.g. Gaussian) or conformer sampler (e.g. Omega) can also be used.
 
 ## First Considerations
-For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward, and give satisfactory results. The results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend BP86 functional with a triple zeta basis set (e.g. def2-tzvp, or cc-pVTZ) and a dispersion correction (e.g. Grimme's Dispersion correction with Becke Johnson damping). The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. To reduce the cost for flexible compounds, we thus recommend to lower the quality of the basis set (e.g. to def2-SVP). The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
+For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward, and should give satisfactory results. The results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend BP86 functional with a triple zeta basis set (e.g. def2-tzvp, or cc-pVTZ) and a dispersion correction (e.g. Grimme's Dispersion correction with Becke Johnson damping, D3BJ). The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. To reduce the cost for flexible compounds, we thus recommend to lower the quality of the basis set (e.g. to def2-SVP). Obviously, this reduces the quality of the final spectrum obtained. The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
 
 ## Generation of 3D Coordinates
 Fenchone has two stereocenters, e.g., 2 Diastereomers could be distinguished using IR (the other isomers are entantiomers, i.e. they would require VCD to be detected). The smiles strings are:
@@ -61,7 +61,7 @@ The script writes out .xyz files for each conformer found. We will use these coo
 
 For the QM calculation, we will use the file ``0.inp``,
 ```
-!RI BP86 def2-SVP D3BJ TightOpt TightSCF freq Grid5 FinalGrad6
+!RI BP86 def2-tzvp D3BJ TightOpt TightSCF freq Grid5 FinalGrad6
 
 * 0 1 xyzfile 0_unopt.xyz
 ```
@@ -69,10 +69,12 @@ For the QM calculation, we will use the file ``0.inp``,
 We will start the computation with
 ``` orca "0.inp > 0.out"```
 , and the results will be stored in the 0.hess (Hessian), 0.engrad (gradient and energy) and 0.out (the output-log) files.
-We notice that most of the computations require multiple CPUs to be feasible. In such case you need to specifiy the number of processors avaible (via ```%pal nprocs N```) and the memory available per processor (via ```%Mem N```) to speed up things considerable, and run the mpi-version of orca. 
+We notice that most of the computations require multiple CPUs to be feasible. In such case you need to specifiy the number of processors avaible (via ```%pal nprocs N end```) and the memory available per processor (via ```%Mem N```) to speed up things considerable. 
 
 ## Generating the input files for the alignment algorithm
-
+The alignment algorithm reads pickle files stored in a specific format:
+First, the (free) energy, saved as a numpy array of the format ```(number_of_conformers, 1)```.
+Second, the frequency calculation output, saved as a numpy array of the format ```(number_of_conformers, number_of_peaks, 2)```. Here, the third axis saves the frequency of the normal-mode in [0], and the dipol or IR-intensity in [1].
 
 
 
