@@ -11,15 +11,14 @@ The files for this tutorial can be found in the folder example. As a conformer s
 For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward, and should give satisfactory results. The results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend BP86 functional with a triple zeta basis set (e.g. def2-tzvp, or cc-pVTZ) and a dispersion correction (e.g. Grimme's Dispersion correction with Becke Johnson damping, D3BJ). The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. To reduce the cost for flexible compounds, we thus recommend to lower the quality of the basis set (e.g. to def2-SVP). Obviously, this reduces the quality of the final spectrum obtained. The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
 
 ## Generation of 3D Coordinates
-Fenchone has two stereocenters, e.g., 2 Diastereomers could be distinguished using IR (the other isomers are entantiomers, i.e. they would require VCD to be detected). The smiles strings are:
+Fenchone has two stereocenters, however, only one diastereomer makes chemically sence. The smile string is:
 1. [C@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
-2. [C@@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
 
 First, we generate the 3D input coordinates using the script conformer_rdkit.py, which creates possible 3D coordinates for each compound. It can be called via 
 ```
-python conformer_rdkit.py [C@]12(C(=O)C([C@@H](C1)CC2)(C)C)C
+python conformer_rdkit.py "[C@]12(C(=O)C([C@@H](C1)CC2)(C)C)C"
 ```
-and will create one conformer for each diastereomere (since Fenchone is rigid).
+and will create one conformer for the compound (since Fenchone is rigid).
 We notice that the compounds are filtered via an heavy atom filtering, i.e. hydrogen atoms are not considered. For compounds, which have an hydroxyl group, we recommend to consider the Hydrogen atom.
 
 ```
@@ -61,20 +60,35 @@ The script writes out .xyz files for each conformer found. We will use these coo
 
 For the QM calculation, we will use the file ``0.inp``,
 ```
-!RI BP86 def2-tzvp D3BJ TightOpt TightSCF freq Grid5 FinalGrad6
+!RIJCOSX BP86 def2-SVP def2/J TightSCF TightOpt freq grid5 finalGrid6
 
 * 0 1 xyzfile 0_unopt.xyz
 ```
-, which uses the RI-BP86/def2-SVP level of theory with a dispersion correction (D3BJ) to perform the optimization and the frequency computation.
+, which uses the BP86/def2-SVP level of theory with the RIJCOSX approximation to perform the optimization and the frequency computation. Generally, dispersion correction (like D3BJ) is recommended. 
 We will start the computation with
 ``` orca "0.inp > 0.out"```
 , and the results will be stored in the 0.hess (Hessian), 0.engrad (gradient and energy) and 0.out (the output-log) files.
+The computation will take approximate 2 hours using a single core.
 We notice that most of the computations require multiple CPUs to be feasible. In such case you need to specifiy the number of processors avaible (via ```%pal nprocs N end```) and the memory available per processor (via ```%Mem N```) to speed up things considerable. 
 
-## Generating the input files for the alignment algorithm
+## Generating the input files for the alignment algorithm and perform the alignment
 The alignment algorithm reads pickle files stored in a specific format:
 First, the (free) energy, saved as a numpy array of the format ```(number_of_conformers, 1)```.
 Second, the frequency calculation output, saved as a numpy array of the format ```(number_of_conformers, number_of_peaks, 2)```. Here, the third axis saves the frequency of the normal-mode in [0], and the dipol or IR-intensity in [1].
+
+The project comes with scripts, which convert the files to the desired format, for orca, it is ```convert_orca.py```.
+```
+
+```
+The code goes through all ```.engrad``` and ```.hess``` files, and read the energies (quantum, in-vacuum), free energies and the frequencies and outputs the files energy.p, gibbs.p, freq.p
+
+
+The alignment code can then be run by 
+```python Main.py -e energy.p -f freq.p -o test```
+and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out), as well as the scores and the calculation options with the standard computation options. A list of computation options is provided at the end of this README.
+
+## Using the GUI for alignment
+For simple cases and screening purposes, the command line code is sufficient. However, for complex data, it might be desireable to pick peaks manually and analyse the spectrum more thorougly. To call the GUI, just call python Main_gui.py
 
 
 
