@@ -1,7 +1,9 @@
 ## irsa
-This reposetory contains two projects:
+This reposetory contains multiple scripts for the analysis of IR and VCD spectra:
 First, the IRSA project, which is a command line program to align theoretical IR/VCD to experimental spectra. This is particular useful if one is interested in scanning automatically large data basis.
 Second, the IRSA_GUI project, which provides a graphical user interface. This is particular useful if one is interested in an exact determination of the (absolute) stereochemistry.
+Third, a toolbox, which purpose is to generate 
+a) Conformers, b) perform baseline corrections for noisy spectra, c) generate input files for the IRSA/IRSA_GUI project.
 
 
 ## Tutorial
