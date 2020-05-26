@@ -88,7 +88,7 @@ The alignment code can then be run by
 and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out), as well as the scores and the calculation options with the standard computation options. A list of computation options is provided at the end of this README.
 
 ## Using the GUI for alignment
-For simple cases and screening purposes, the command line code is sufficient. However, for complex data, it might be desireable to pick peaks manually and analyse the spectrum more thorougly. To call the GUI, just call python Main_gui.py
+For simple cases and screening purposes, the command line code is sufficient. However, for complex data, it might be desireable to pick peaks manually and analyse the spectrum more thorougly. To call the GUI, just call ```python Main_gui.py```
 
 
 
