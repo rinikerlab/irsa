@@ -1,4 +1,6 @@
 [...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL NEEDS APPROX ONE MORE WEEK TO BE FINISHED [...]
+CHECK THE STATUS HERE
+https://scicomp.ethz.ch/wiki/System_status
 
 ## irsa
 This reposetory contains multiple scripts for the analysis of IR and VCD spectra:
