@@ -1,3 +1,5 @@
+[...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL NEEDS APPROX ONE MORE WEEK TO BE FINISHED [...]
+
 ## irsa
 This reposetory contains multiple scripts for the analysis of IR and VCD spectra:
 First, the IRSA project, which is a command line program to align theoretical IR/VCD to experimental spectra. This is particular useful if one is interested in scanning automatically large data basis.
@@ -7,10 +9,10 @@ a) Conformers, b) perform baseline corrections for noisy spectra, c) generate in
 
 
 ## Tutorial
-The files for this tutorial can be found in the folder example. As a conformer sampler, we will use RDKit, and for the quantum mechanical frequency computations, we will use orca 4.2.0, since both programs are free of charge. Any other QM program (e.g. Gaussian) or conformer sampler (e.g. Omega) can also be used.
+The files for this tutorial can be found in the folder example. As a conformer sampler, we will use RDKit, and for the quantum mechanical frequency computations, we will use orca 4.2.0, since both programs are free of charge. Any other QM program (e.g. Gaussian) or conformer sampler (e.g. Omega) can also be used. Python scripts to sample conformers with RDKit and with Omega are available in the Toolbox. Scripts for converting orca and gaussian output files to the necessary pickle files are also available.
 
 ## First Considerations
-For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward, and should give satisfactory results. The results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend BP86 functional with a triple zeta basis set (e.g. def2-tzvp, or cc-pVTZ) and a dispersion correction (e.g. Grimme's Dispersion correction with Becke Johnson damping, D3BJ). The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. To reduce the cost for flexible compounds, we thus recommend to lower the quality of the basis set (e.g. to def2-SVP). Obviously, this reduces the quality of the final spectrum obtained. The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
+For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward. From the experimental side, we can recommend to perform GC-IR experiments to remove the influence from the solvent, which often interacts with the solute. If this is not possible, or if the GC-IR spectrum is very noisy, IR/VCD experiments can be performed in solvent. Here, it is often desirable to try different solvents (Chloroform, DMSO). From the computational side, the results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend the BP86 functional with the cc-pVTZ functional. This combination is known to give a favourable error cancellation. However, the basis set is quite expensive, and if the computational cost is a limiting factor, changing the basis set to def2-tzvp or def2-SVP might be considered. The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. Obviously, this reduces the quality of the final spectrum obtained. The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
 
 ## Generation of 3D Coordinates
 Fenchone has two stereocenters, however, only one diastereomer makes chemically sence. The smile string is:
@@ -62,7 +64,7 @@ The script writes out .xyz files for each conformer found. We will use these coo
 
 For the QM calculation, we will use the file ``0.inp``,
 ```
-!RIJCOSX BP86 def2-SVP def2/J TightSCF TightOpt freq grid5 finalGrid6
+!RIJCOSX BP86 def2-SVP def2/J TightSCF TightOpt freq grid5 finalGrid6 
 
 * 0 1 xyzfile 0_unopt.xyz
 ```
@@ -78,19 +80,22 @@ The alignment algorithm reads pickle files stored in a specific format:
 First, the (free) energy, saved as a numpy array of the format ```(number_of_conformers, 1)```.
 Second, the frequency calculation output, saved as a numpy array of the format ```(number_of_conformers, number_of_peaks, 2)```. Here, the third axis saves the frequency of the normal-mode in [0], and the dipol or IR-intensity in [1].
 
-The project comes with scripts, which convert the files to the desired format, for orca, it is ```convert_orca.py```.
+The project comes with scripts, which convert the files to the desired format, for orca (and gaussian), it is ```convert_orca.py``` and ```convert_gaussian.py```.
+This file is placed in the folder, where the calculation was performed
 ```
-
+python convert_orca.py
 ```
 The code goes through all ```.engrad``` and ```.hess``` files, and read the energies (quantum, in-vacuum), free energies and the frequencies and outputs the files energy.p, gibbs.p, freq.p
 
 
 The alignment code can then be run by 
 ```python Main.py -e energy.p -f freq.p -o test```
-and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out), as well as the scores and the calculation options with the standard computation options. A list of computation options is provided at the end of this README.
+and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out), as well as the scores (test.txt) and the calculation options with the standard computation options. A list of computation options is provided at the end of this README.
 
-## Using the GUI for alignment
-For simple cases and screening purposes, the command line code is sufficient. However, for complex data, it might be desireable to pick peaks manually and analyse the spectrum more thorougly. To call the GUI, just call ```python Main_gui.py```
+To use the GUI instead, one needs to call the program
+```python Main_GUI.py```.
+[...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL NEEDS APPROX ONE MORE WEEK TO BE FINISHED [...]
+
 
 
 
