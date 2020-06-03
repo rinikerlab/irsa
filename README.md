@@ -66,15 +66,26 @@ The script writes out .xyz files for each conformer found. We will use these coo
 
 For the QM calculation, we will use the file ``0.inp``,
 ```
-!RIJCOSX BP86 def2-SVP def2/J TightSCF TightOpt freq grid5 finalGrid6 
+!RI BP86 def2-tzvp def2/J TightSCF TightOpt D3BJ freq grid5 finalGrid6
+%pal nprocs 12
+end
 
 * 0 1 xyzfile 0_unopt.xyz
 ```
-, which uses the BP86/def2-SVP level of theory with the RIJCOSX approximation to perform the optimization and the frequency computation. Generally, dispersion correction (like D3BJ) is recommended. 
+, which uses the BP86/def2-tzvp level of theory with the RIJCOSX approximation to perform the optimization and the frequency computation. Generally, dispersion correction (like D3BJ) is recommended. 
 We will start the computation with
-``` orca "0.inp > 0.out"```
+``` bsub -n 12 "orca 0.inp > 0.out"```
 , and the results will be stored in the 0.hess (Hessian), 0.engrad (gradient and energy) and 0.out (the output-log) files.
-The computation will take approximate 2 hours using a single core.
+However, the command line might vary depending on your cluster architecture. If you only have a single core available, I would recommend to reduce the level of theory, e.g.,
+
+```
+!RI BP86 def2-SVP def2/J TightSCF TightOpt D3BJ freq grid5 finalGrid6
+%pal nprocs 12
+end
+
+* 0 1 xyzfile 0_unopt.xyz
+```
+
 We notice that most of the computations require multiple CPUs to be feasible. In such case you need to specifiy the number of processors avaible (via ```%pal nprocs N end```) and the memory available per processor (via ```%Mem N```) to speed up things considerable. 
 
 ## Generating the input files for the alignment algorithm and perform the alignment
@@ -83,11 +94,11 @@ First, the (free) energy, saved as a numpy array of the format ```(number_of_con
 Second, the frequency calculation output, saved as a numpy array of the format ```(number_of_conformers, number_of_peaks, 2)```. Here, the third axis saves the frequency of the normal-mode in [0], and the dipol or IR-intensity in [1].
 
 The project comes with scripts, which convert the files to the desired format, for orca (and gaussian), it is ```convert_orca.py``` and ```convert_gaussian.py```.
-This file is placed in the folder, where the calculation was performed
+The python scripts take two inputs: The number of atoms and the directory where to find the output files, e.g.,
 ```
-python convert_orca.py
+python convert_orca.py -n 27 -d /DIR/TO/YOUR/CALC/
 ```
-The code goes through all ```.engrad``` and ```.hess``` files, and read the energies (quantum, in-vacuum), free energies and the frequencies and outputs the files energy.p, gibbs.p, freq.p.
+The code goes through all ```.out``` files, and read the energies (quantum, in-vacuum), free energies and the frequencies and outputs the files energy.p, gibbs.p, freq.p, which are necessary for the alignment
 
 
 The alignment code can then be run by 
