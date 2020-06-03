@@ -1,8 +1,11 @@
-[...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL NEEDS APPROX ONE MORE WEEK TO BE FINISHED [...]
+[...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL IS NOT COMPLETE YET [...]
 CHECK THE STATUS HERE
 https://scicomp.ethz.ch/wiki/System_status
 
-If you use the algorithm and report your results, we would kindly ask you to cite
+UPDATE:
+OUR CLUSTER IS BACK UP, SO I CONTINUE WORKING ON THIS ...
+
+If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 
 @article{Boeselt2019,
 title={Determination of Absolute Stereochemistry of Flexible Molecules Using a Vibrational Circular Dichroism (VCD) Spectra Alignment Algorithm},
@@ -40,15 +43,15 @@ author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzm
 This reposetory contains multiple scripts for the analysis of IR and VCD spectra:
 First, the IRSA project, which is a command line program to align theoretical IR/VCD to experimental spectra. This is particular useful if one is interested in scanning automatically large data basis.
 Second, the IRSA_GUI project, which provides a graphical user interface. This is particular useful if one is interested in an exact determination of the (absolute) stereochemistry.
-Third, a toolbox, which purpose is to generate 
-a) Conformers, b) perform baseline corrections for noisy spectra, c) generate input files for the IRSA/IRSA_GUI project.
+Third, a toolbox, which purpose is to 
+a) generate Conformers, b) perform baseline corrections for noisy spectra, c) generate input files for the IRSA/IRSA_GUI project.
 
 
 ## Tutorial
 The files for this tutorial can be found in the folder example. As a conformer sampler, we will use RDKit, and for the quantum mechanical frequency computations, we will use orca 4.2.0, since both programs are free of charge. Any other QM program (e.g. Gaussian) or conformer sampler (e.g. Omega) can also be used. Python scripts to sample conformers with RDKit and with Omega are available in the Toolbox. Scripts for converting orca and gaussian output files to the necessary pickle files are also available.
 
 ## First Considerations
-For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward. From the experimental side, we can recommend to perform GC-IR experiments to remove the influence from the solvent, which often interacts with the solute. If this is not possible, or if the GC-IR spectrum is very noisy, IR/VCD experiments can be performed in solvent. Here, it is often desirable to try different solvents (Chloroform, DMSO). Further, we have the experience that especially the region below 1000 wavenumbers strongly differs between isomers. Therefore, it is desirable to aim for a high resolution in this region. **Wavenumbers above 1500 are usually not suitable for determining the stereochemistry**.  From the computational side, the results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend the BP86 functional with the cc-pVTZ basis set. This combination is known to give a favourable error cancellation. However, the basis set is quite expensive, and if the computational cost is a limiting factor, changing the basis set to def2-tzvp or def2-SVP might be considered. The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. Obviously, this reduces the quality of the final spectrum obtained. The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
+For rigid and semi rigid compounds, the usage of the alignment algorithm should be straight-forward. From the experimental side, we can recommend to perform GC-IR experiments to remove the influence from the solvent, which often interacts with the solute. If this is not possible, or if the GC-IR spectrum is very noisy, IR/VCD experiments can be performed in solvent. Here, it is often desirable to try different solvents (Chloroform, DMSO). Further, we have the experience that especially the region below 1000 wavenumbers strongly differs between isomers. Therefore, it is desirable to aim for a high resolution in this region. **Wavenumbers above 1500 are usually not suitable for determining the stereochemistry**.  From the computational side, the results depend on the level of theory on which the quantum mechanical computations will be performed, and we can usually recommend the BP86 functional with the cc-pVTZ basis set for rigid conformers. This combination is known to give a favourable error cancellation. However, the basis set is quite expensive, and if the computational cost is a limiting factor, changing the basis set to def2-tzvp or def2-SVP might be considered. For flexible compounds, we also need to achieve chemical accuracy, therefore switching to a hybrid functional might become necessary. The most demanding step in the alignment procedure is the computation of the frequency spectra, since it requires the computation of the hessian matrix. For flexible compounds, this cost can quickly get quite demanding. Obviously, this reduces the quality of the final spectrum obtained. The first example we are going to discuss is the rigid compound Fenchone, others examples follow.
 
 ## Generation of 3D Coordinates
 Fenchone has two stereocenters, however, only one diastereomer makes chemically sence. The smile string is:
@@ -135,10 +138,25 @@ python convert_orca.py -n 27 -d /DIR/TO/YOUR/CALC/
 The code goes through all ```.out``` files, and read the energies (quantum, in-vacuum), free energies and the frequencies and outputs the files energy.p, gibbs.p, freq.p, which are necessary for the alignment
 
 
+## Performing the alignment with the command line version
+
 The alignment code can then be run by 
-```python Main.py -e energy.p -f freq.p -exp IR.txt -lb 1000 -hb 1500 -o test```
+```python Main.py -e energy.p -f freq.p -exp IR.txt -lb 1000 -hb 1500 -o test -mu 0.99 -s1 0.1-s2 0.01```
 and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out), as well as the scores (test.txt) and the calculation options with the standard computation options. A list of computation options is provided at the end of this README.
+
+
+
+## Performing the alignment with the Graphical User Interface
+
 
 To use the GUI instead, one needs to call the program
 ```python Main_GUI.py```.
 [...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL NEEDS APPROX ONE MORE WEEK TO BE FINISHED [...]
+
+
+
+
+
+
+
+## COMPUTATION OPTIONS
