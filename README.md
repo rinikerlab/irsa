@@ -2,6 +2,40 @@
 CHECK THE STATUS HERE
 https://scicomp.ethz.ch/wiki/System_status
 
+If you use the algorithm and report your results, we would kindly ask you to cite
+
+@article{Boeselt2019,
+title={Determination of Absolute Stereochemistry of Flexible Molecules Using a Vibrational Circular Dichroism (VCD) Spectra Alignment Algorithm},
+author={L. Boeselt and D. Sidler and T. Kittelmann and J. Stohner and D. Zindel and T. Wagner and S. Riniker},
+journal={JCIM},
+volume={59},
+number={5},
+pages={1826-1838},
+year={2019},
+doi = {10.1021/acs.jcim.8b00789}}  
+
+
+@article{Boeselt2020,
+title={Determination of Absolute Stereochemistry of Flexible Molecules Using a Vibrational Circular Dichroism (VCD) Spectra Alignment Algorithm},
+author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker},
+journal={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm forvInfrared Spectra},
+volume={xxx},
+number={xxx},
+pages={xxx},
+year={2020},
+doi = {10.1021/acs.analchem.0c01399}}  
+
+If you use the provided Data or other scripts to analyze your IR spectra, we would kindly ask you to cite
+
+@misc{rinikerlab2020,
+title={Toolkit for IR analysis},
+url={https://github.com/rinikerlab/irsa},
+note={Software available from https://github.com/rinikerlab/irsa},
+author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker},
+  year={2020},
+}
+
+
 ## irsa
 This reposetory contains multiple scripts for the analysis of IR and VCD spectra:
 First, the IRSA project, which is a command line program to align theoretical IR/VCD to experimental spectra. This is particular useful if one is interested in scanning automatically large data basis.
