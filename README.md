@@ -153,10 +153,12 @@ For this, you first need to install Qt5. Installation instructions can be found 
 
 Go to the folder GUI and start the code via ```python Gui.py```.
 
+![alt text](https://github.com/rinikerlab/irsa/blob/master/gui1.png)
 
 
 
 
+![alt text](https://github.com/rinikerlab/irsa/blob/master/gui1.png)
 
 
 
