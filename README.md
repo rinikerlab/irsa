@@ -1,9 +1,7 @@
-[...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL IS NOT COMPLETE YET [...]
-CHECK THE STATUS HERE
-https://scicomp.ethz.ch/wiki/System_status
-
 UPDATE:
 OUR CLUSTER IS BACK UP, SO I CONTINUE WORKING ON THIS ...
+
+## Version Beta
 
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 
@@ -27,6 +25,8 @@ number={xxx},
 pages={xxx},
 year={2020},
 doi = {10.1021/acs.analchem.0c01399}}  
+
+and cite the paper where you got the data from.
 
 If you use the provided Data or other scripts to analyze your IR spectra, we would kindly ask you to cite
 
