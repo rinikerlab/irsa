@@ -1,7 +1,10 @@
 UPDATE:
 OUR CLUSTER IS BACK UP, SO I CONTINUE WORKING ON THIS ...
 
-## Version Beta
+## Version Beta 0.1
+
+Please send requests and Bug reports to
+Lennard.Boeselt@phys.chem.ethz.ch
 
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 
