@@ -149,9 +149,23 @@ and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out
 ## Performing the alignment with the Graphical User Interface
 
 Next, we perform the alignment of (+)-Borneol via the graphical user interface.
-For this, you first need to install Qt5. Installation instructions can be found on the offical website.
+For this, you first need to install Qt5 for python. Installation instructions can be found on the offical website.
 
 Go to the folder GUI and start the code via ```python Gui.py```.
+
+A window will open, which will look like the pictures at the end in this chapter.
+This window is divided into 3 subpanels (experimental spectra, theoretical spectra and alignment).
+First, read in the experimental IR spectrum (DATA/borneol_IR.txt) and the experimental VCD spectraum (DATA/borneol_VCD.txt)
+Next, click the button normalize to normalize the spectra to intensity 1.
+Then, click the Button automatic peak selection to obtain the peaks.
+
+Next, you will need in to load the theoretical data. For this, click on LOAD E (DATA/borneol_E.p) then LOAD IR (DATA/borneol_freq.p) and LOAD VCD (DATA/borneol_vcd.p)
+You can set the Lorentzband width to 12 to have an spectrum which agrees better with experiment.
+
+Next, press change the value mu to 1.0135 (the spectrum was computed with BP86/cc-pVTZ, where the shift factor of 1.0135 is an appropiated value). Next, press align, and you results should look like the one in the pictures provided below.
+
+The textfield to the right
+
 
 
 
