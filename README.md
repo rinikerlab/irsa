@@ -158,7 +158,7 @@ Go to the folder GUI and start the code via ```python Gui.py```.
 
 
 
-![alt text](https://github.com/rinikerlab/irsa/blob/master/gui1.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/gui2.png)
 
 
 
