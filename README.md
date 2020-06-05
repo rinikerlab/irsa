@@ -148,15 +148,16 @@ and the code outputs the unaligned (testunshifted.out), aligned (testaligned.out
 
 ## Performing the alignment with the Graphical User Interface
 
+Next, we perform the alignment of (+)-Borneol via the graphical user interface.
+For this, you first need to install Qt5. Installation instructions can be found on the offical website.
 
-To use the GUI instead, one needs to call the program
-```python Main_GUI.py```.
-[...] OUR CLUSTER IS DOWN, THUS THIS TUTORIAL NEEDS APPROX ONE MORE WEEK TO BE FINISHED [...]
-
-
+Go to the folder GUI and start the code via ```python Gui.py```.
 
 
 
 
 
-## COMPUTATION OPTIONS
+
+
+
+## Computational options
