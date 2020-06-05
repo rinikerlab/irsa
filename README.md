@@ -164,7 +164,8 @@ You can set the Lorentzband width to 12 to have an spectrum which agrees better 
 
 Next, press change the value mu to 1.0135 (the spectrum was computed with BP86/cc-pVTZ, where the shift factor of 1.0135 is an appropiated value). Next, press align, and you results should look like the one in the pictures provided below.
 
-The textfield to the right
+The textfield to the right provides the numeric results obtained.
+The score (more negative is better!), the pearson coefficient of the aligned IR and the pearson coefficient of the aligned VCD spectrum. If you only want to align IR spectra, you can just leave out the VCD spectrum.
 
 
 
