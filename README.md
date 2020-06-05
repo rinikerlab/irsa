@@ -1,6 +1,3 @@
-UPDATE:
-OUR CLUSTER IS BACK UP, SO I CONTINUE WORKING ON THIS ...
-
 ## Version Beta 0.1
 
 Please send requests and Bug reports to
