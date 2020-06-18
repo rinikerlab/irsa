@@ -1,4 +1,5 @@
 ## Version Beta 0.1
+We fixed a part in the Boltzmann weighting
 This side is still under construction
 Please send requests and Bug reports to
 Lennard.Boeselt@phys.chem.ethz.ch
