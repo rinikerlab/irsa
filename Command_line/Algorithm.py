@@ -114,4 +114,3 @@ class Algorithm:
         returnvalue = al_mat[n-1,m-1]/(n) ##NORMALIZE VALUE BY NUMBER OF THEORETICAL PEAKS. MIGHT BE CHANGED FOR MORE
                                           ##SENSIBLE VALUES
         return returnvalue, old_freq, freq, inten
-
