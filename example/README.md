@@ -10,7 +10,8 @@ SCRIPTS:<br/>
   python script, to create the necessary pickle files<br/>
 <br/>
 <br/>
-Notice that we did not know the correct structure at this stage. Hence, the archives are named 0 (isomer epi-I in the publication) and 1 (isomer I, correct isomer).
+Notice that we did not know the correct structure at this stage. Hence, the archives for the sampling/calculation stages are named 0 (isomer epi-I in the publication) and 1 (isomer I, correct isomer).
+
 
 The essential part is in the directory execute_program:<br>
 Here, the baseline-corrected experimental spectrum is provided, as well as the hand picked peaks. <br>
