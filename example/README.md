@@ -8,3 +8,6 @@ DFT Computations:<br/>
   Input-files and output files from the DFT calculations<br/>
 IRSA scripts:<br/>
   Pickled files and scripts, which can be used to obtain the results reported in the publication<br/>
+<br/>
+<br/>
+Notice that we did not know the correct structure at this stage. Hence, the archives are named 0 (isomer epi-I in the publication) and 1 (isomer I, correct isomer).
