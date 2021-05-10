@@ -1,4 +1,4 @@
-Data needed for reproducing the results in the Publication <br/>
+Data for the submitted Article <br/>
 F. Pultar, JACS, 2021, submitted.
 <br/>
 The structure is as follows:<br/>
