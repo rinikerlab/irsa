@@ -1,0 +1,5 @@
+!RI BP86 def2-tzvp def2/J D3BJ TIGHTSCF TightOpt Grid5 FinalGrid6 freq
+%maxcore 4000
+%pal nprocs 24
+end
+* xyzfile 0 1 10_old.xyz 
