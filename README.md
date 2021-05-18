@@ -1,4 +1,4 @@
-## Data for the submission F. Pultar, JACS, 2011, submitted, can be found in the directory "example"
+## Data for the submission F. Pultar, JACS, 2021, submitted, can be found in the directory "example"
 
 ## Version Beta 0.1
 We fixed a part in the Boltzmann weighting
