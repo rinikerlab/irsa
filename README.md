@@ -162,7 +162,7 @@ First, read in the experimental IR spectrum (DATA/borneol_IR.txt) and the experi
 Next, click the button normalize to normalize the spectra to intensity 1.
 Then, click the Button automatic peak selection to obtain the peaks.
 
-Next, you will need in to load the theoretical data. For this, click on LOAD E (DATA/borneol_E.p) then LOAD IR (DATA/borneol_freq.p) and LOAD VCD (DATA/borneol_vcd.p)
+Next, you will need in to load the theoretical data. For this, click on LOAD E (example_borneol/energy.p) then LOAD IR (example/freq.p) and LOAD VCD (example_borneol/vcd.p)
 You can set the Lorentzband width to 12 to have an spectrum which agrees better with experiment.
 
 Next, press change the value mu to 1.0135 (the spectrum was computed with BP86/cc-pVTZ, where the shift factor of 1.0135 is an appropiated value). Next, press align, and you results should look like the one in the pictures provided below.
