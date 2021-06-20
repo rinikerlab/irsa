@@ -3,7 +3,7 @@
 We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial.
 
 ## Test case
-![alt text](https://github.com/rinikerlab/irsa/blob/master/diastereomers.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/diastereomeric_pair.png)
 Consider the diastereomeric pair 1a and 2a, where we measured the experimental IR and VCD spectrum to determine the relative stereochemistry and the absolute stereochemistry. We will refer to the enantiomer of 1a as 1b, and to the enantiomer of 2a as 2b.
 First, we generate the conformational ensemble using RDKit.
 The isomeric SMILES string for compound 1a is
