@@ -1,6 +1,28 @@
 ## Version Beta 0.2
+If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 
-We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial.
+@article{Boeselt2019,
+title={Determination of Absolute Stereochemistry of Flexible Molecules Using a Vibrational Circular Dichroism (VCD) Spectra Alignment Algorithm},
+author={L. Boeselt and D. Sidler and T. Kittelmann and J. Stohner and D. Zindel and T. Wagner and S. Riniker},
+journal={JCIM},
+volume={59},
+number={5},
+pages={1826-1838},
+year={2019},
+doi = {10.1021/acs.jcim.8b00789}}  
+
+@article{Boeselt2020,
+title={Determination of Absolute Stereochemistry of Flexible Molecules Using a Vibrational Circular Dichroism (VCD) Spectra Alignment Algorithm},
+author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker},
+journal={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm forvInfrared Spectra},
+volume={xxx},
+number={xxx},
+pages={xxx},
+year={2020},
+doi = {10.1021/acs.analchem.0c01399}}  
+
+We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial. For question, please write
+Lennard.Boeselt@phys.chem.ethz.ch
 
 ## Test case
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Diastereomeric_pair.png)
