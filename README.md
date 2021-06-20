@@ -164,9 +164,11 @@ sucess
 , where the pearson number and spearman number refers to overlap metrics between the experimental and theoretical IR spectrum, as well as the experimental and theoretical VCD spectrum. The returnvalue refers to the score of the alignment. The -1 refers to the enantiomer of the provided compound (in this case, 1b).
 The aligned spectra will look like:
 IR spectrum compound 1a (black = experiment, red = aligned, orange = unshifted, but scaled)
-![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd_.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd__1.png)
 VCD spectrum compound 1a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_1_0.98_0.015_vcd__1.png)
+IR spectrum compound 1b (black = experiment, red = aligned, orange = unshifted, but scaled)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd__-1.png)
 VCD spectrum compound 1b (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_1_0.98_0.015_vcd__-1.png)
 .
@@ -208,6 +210,8 @@ IR spectrum compound 2a (black = experiment, red = aligned, orange = unshifted, 
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd_.png)
 VCD spectrum compound 2a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_1_0.98_0.015_vcd__1.png)
+IR spectrum compound 2b (black = experiment, red = aligned, orange = unshifted, but scaled)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd__-1.png)
 VCD spectrum compound 2b (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_1_0.98_0.015_vcd__-1.png)
 
