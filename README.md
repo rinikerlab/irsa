@@ -82,7 +82,7 @@ H      2.519066    0.147472    0.722558
 @basis.gbs
 
 ```
-where basis.gbs refers to the def2-TZVP basis set and can be extracted from the folder tutorial. The computation will result in .log files, which contain all information from the computation.
+where basis.gbs refers to the def2-TZVP basis set and can be extracted from the folder Tutorial. The computation will result in .log files, which contain all information from the computation.
 Next, we extract the IR and the VCD spectrum from the calculation. Simply place the script ```IR_and_VCD_g09.py``` in the folder of your log files, type ```python IR_and_VCD_g09.py```, which will result in the ```IR_theo.txt``` and ```vcd_theo.txt```. Place the experimental IR and VCD spectra together with the theoretical spectra in one folder, and call ```python pick_peaks_exp_IR_VCD.py```. This will pick the peaks of the experimental and theoretical IR and VCD spectra by a simple distance criterium, and will create the files ```peaks_mod_theo.txt```,```peaks_mod_exp.txt```, ```peaks_mod_theo_vcd.txt``` and ```peaks_mod_exp_vcd.txt```. In each file, the first column refers to the normalized intensity, the second column to the x-axis, and the third column refers to, whether the data point belongs to the IR spectrum (0) or to the VCD spectrum (1). You can create these files also on your own, when you have noisy data and the peak picking algorithm does not perform appropriately.
 Next, we are going to align the spectra to each other. For this, consider the file
 ```Settings.py```, which reads
