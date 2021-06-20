@@ -2,11 +2,6 @@ import numpy as np
 import Algorithm as nd
 import matplotlib.pyplot as py
 from Settings import Settings
-from shapely.geometry import Polygon
-from shapely.geometry import LineString
-from shapely.ops import unary_union, polygonize
-from pandas import merge
-from pandas import DataFrame
 from scipy.stats import spearmanr
 from scipy.stats import pearsonr
 from scipy.interpolate import interp1d
