@@ -1,3 +1,195 @@
+## Version Beta 0.2
+
+We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial.
+
+## Test case
+![alt text](https://github.com/rinikerlab/irsa/blob/master/diastereomers.png)
+Consider the diastereomeric pair 1a and 2a, where we measured the experimental IR and VCD spectrum to determine the relative stereochemistry and the absolute stereochemistry. We will refer to the enantiomer of 1a as 1b, and to the enantiomer of 2a as 2b.
+First, we generate the conformational ensemble using RDKit.
+The isomeric SMILES string for compound 1a is
+O[C@]1([H])[C@](C)(C2(C)C)CC[C@H]2C1
+and the isomeric SMILES string for compound 2a is
+[H][C@]1(O)[C@](C2(C)C)(CC[C@H]2C1)C
+. Save the string of compound 1a to a file called ```SMILES```.
+The code snipped
+```
+import numpy as np
+import matplotlib.pyplot as py
+import rdkit
+from rdkit import *
+from rdkit.Chem import *
+from rdkit.Chem.rdDistGeom import EmbedMultipleConfs
+from rdkit.Chem.rdmolfiles import *
+f=open('SMILES','r')
+string=str(f.readline())
+smile=string
+solute_mol = AddHs(MolFromSmiles(smile))
+EmbedMultipleConfs(solute_mol, numConfs=250, clearConfs=True, pruneRmsThresh=0.5, numThreads=8)
+for i in range(250):
+    try:
+        rdkit.Chem.rdmolfiles.MolToXYZFile(solute_mol, str(i)+".xyz", confId=i)
+    except:
+        print("Exhausted")
+        break      
+```
+will generate a conformational ensemble of 1a and 2a. Simply copy & paste the code to a file (we will name it ```create.py```), and call 
+```
+python create.py
+```
+. This will generate n xyz-files, one for each conformer found.
+For each conformer, prepare a computational input file. We will use gaussian, version 09D.
+For compound 1a, this may look like
+```
+%mem=16000MB
+%NProcShared=16
+#B3LYP/Gen scf=tight freq=VCD Opt=Tight Integral(Grid=SuperFine) EmpiricalDispersion=GD3
+
+0
+
+0 1
+O      1.902578   -0.390373   -1.506707
+C      1.143131   -1.021854   -0.523900
+C     -0.299644   -0.559541   -0.576112
+C     -0.922356   -0.577159   -1.894603
+C     -0.187104    0.797228    0.083466
+C      0.707782    1.743241   -0.639092
+C     -1.504518    1.429500    0.363166
+C     -1.036367   -1.340693    0.502571
+C     -0.563181   -0.725133    1.825531
+C      0.434573    0.290022    1.393955
+C      1.628243   -0.467675    0.822702
+H      2.828656   -0.306770   -1.155892
+H      1.196109   -2.113809   -0.564316
+H     -1.945529   -1.048327   -1.818866
+H     -0.353505   -1.291899   -2.559489
+H     -1.021334    0.372263   -2.425153
+H      0.322476    2.797734   -0.513075
+H      1.752207    1.720400   -0.326854
+H      0.603401    1.541416   -1.733088
+H     -2.051490    1.667494   -0.555298
+H     -1.323200    2.382327    0.892540
+H     -2.176397    0.833684    1.000923
+H     -0.660822   -2.397316    0.406226
+H     -2.119211   -1.313686    0.393149
+H     -0.006732   -1.527789    2.380344
+H     -1.380448   -0.367860    2.442272
+H      0.685277    1.067176    2.083587
+H      1.828339   -1.340072    1.479451
+H      2.519066    0.147472    0.722558
+
+@basis.gbs
+
+```
+where basis.gbs refers to the def2-TZVP basis set and can be extracted from the folder tutorial. The computation will result in .log files, which contain all information from the computation.
+Next, we extract the IR and the VCD spectrum from the calculation. Simply place the script ```IR_and_VCD_g09.py``` in the folder of your log files, type ```python IR_and_VCD_g09.py```, which will result in the ```IR_theo.txt``` and ```vcd_theo.txt```. Place the experimental IR and VCD spectra together with the theoretical spectra in one folder, and call ```python pick_peaks_exp_IR_VCD.py```. This will pick the peaks of the experimental and theoretical IR and VCD spectra by a simple distance criterium, and will create the files ```peaks_mod_theo.txt```,```peaks_mod_exp.txt```, ```peaks_mod_theo_vcd.txt``` and ```peaks_mod_exp_vcd.txt```. In each file, the first column refers to the normalized intensity, the second column to the x-axis, and the third column refers to, whether the data point belongs to the IR spectrum (0) or to the VCD spectrum (1). You can create these files also on your own, when you have noisy data and the peak picking algorithm does not perform appropriately.
+Next, we are going to align the spectra to each other. For this, consider the file
+```Settings.py```, which reads
+```
+class Settings:
+    def __init__(self):
+        self.directory='1a'
+        self.use_vcd=True
+
+        self.shift_factor=0.98
+        self.cutoff_absolute=False
+        self.cutoff=0.015
+        self.sigma_1=0.192
+        self.sigma_2=0.1
+        self.x_min=1000
+        self.x_max=1500
+    def get(self):
+        return self.shift_factor, self.cutoff_absolute, self.cutoff, self.sigma_1, self.sigma_2, self.use_vcd, self.x_min, self.x_max
+    def get_directory(self):
+        return self.directory
+```
+.
+Most importantly is the variable ```self.directory```, which refers to the total path of the folder, where the files ```IR_theo.txt```,```vcd_theo.txt```, ```peaks_mod_theo.txt```,```peaks_mod_exp.txt```, ```peaks_mod_theo_vcd.txt```, ```peaks_mod_exp_vcd.txt``` and the experimental spectra ```VCD.txt``` and ```IR.txt``` are saved. Next, call ```python Main.py```.
+This will output the png files ```1a_1_0.98_0.015_vcd__1.png```,```1a_1_0.98_0.015_vcd__-1.png```, and ```1b_0_0.98_0.015_vcd_.png```. The first spectrum belong to the aligned vcd spectrum of the provided diastereomer, the second file to the aligned vcd spectrum of the enatiomer, and the third file to the aligned IR spectrum. Black refers always to the experimental spectrum, red to the aligned spectrum, and orange to the unshifted, but by the shift-factor scaled spectrum. Further, it will output information of the alignment as
+```
+VCD SPECTRUM AVAILABLE
+CALL ALIGNMENT
+Initialization ND
+Initialization SUCCESSFUL
+START ALIGNMENT
+ALIGNMENT SUCCEESFUL
+returnvalue -0.44260629081427527
+READ IN EXPERIMENT
+READ IN THEORETICAL SPECTRUM
+Fontconfig warning: ignoring UTF-8: not a valid region tag
+-1 Alignment Score 0.44260629081427527
+-1 IR pearson number 0.2479916761927686
+-1 IR spearman number 0.5056763587054348
+-1 VCD pearson number 0.088569617048474
+-1 VCD spearman number 0.1679884799539198
+VCD SPECTRUM AVAILABLE
+CALL ALIGNMENT
+Initialization ND
+Initialization SUCCESSFUL
+START ALIGNMENT
+ALIGNMENT SUCCEESFUL
+returnvalue -0.4421465263852314
+READ IN EXPERIMENT
+READ IN THEORETICAL SPECTRUM
+1 Alignment Score 0.4421465263852314
+1 IR pearson number 0.20554358106704632
+1 IR spearman number 0.37500399601598405
+1 VCD pearson number 0.13037652458387428
+1 VCD spearman number 0.12164679058716235
+sucess
+```
+, where the pearson number and spearman number refers to overlap metrics between the experimental and theoretical IR spectrum, as well as the experimental and theoretical VCD spectrum. The returnvalue refers to the score of the alignment. The -1 refers to the enantiomer of the provided compound (in this case, 1b).
+The aligned spectra will look like
+![alt text](https://github.com/rinikerlab/irsa/blob/master/1a_IR.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/1a_VCD.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/1b_VCD.png).
+Repeating this procedure with compound 2a will result in 
+```
+VCD SPECTRUM AVAILABLE
+CALL ALIGNMENT
+Initialization ND
+Initialization SUCCESSFUL
+START ALIGNMENT
+ALIGNMENT SUCCEESFUL
+returnvalue -0.7702852131065266
+READ IN EXPERIMENT
+READ IN THEORETICAL SPECTRUM
+Fontconfig warning: ignoring UTF-8: not a valid region tag
+-1 Alignment Score 0.7702852131065266
+-1 IR pearson number 0.8167838895785107
+-1 IR spearman number 0.594695114780459
+-1 VCD pearson number 0.820094471868076
+-1 VCD spearman number 0.6286756027024107
+VCD SPECTRUM AVAILABLE
+CALL ALIGNMENT
+Initialization ND
+Initialization SUCCESSFUL
+START ALIGNMENT
+ALIGNMENT SUCCEESFUL
+returnvalue -0.743434233344465
+READ IN EXPERIMENT
+READ IN THEORETICAL SPECTRUM
+1 Alignment Score 0.743434233344465
+1 IR pearson number 0.815046461294488
+1 IR spearman number 0.5928068832275329
+1 VCD pearson number -0.7752980148118074
+1 VCD spearman number -0.5317340309361237
+sucess
+```
+and the spectra
+![alt text](https://github.com/rinikerlab/irsa/blob/master/1a_IR.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/1a_VCD.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/1b_VCD.png).
+
+From the overlap metrics and the figures, it is clear that compound 2b is the compound which was measured.
+
+
+
+
+
+
+ 
+
+
 ## Data for the submission F. Pultar, JACS, 2021, submitted, can be found in the directory "example"
 
 ## Version Beta 0.1
