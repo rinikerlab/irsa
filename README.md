@@ -142,8 +142,8 @@ sucess
 , where the pearson number and spearman number refers to overlap metrics between the experimental and theoretical IR spectrum, as well as the experimental and theoretical VCD spectrum. The returnvalue refers to the score of the alignment. The -1 refers to the enantiomer of the provided compound (in this case, 1b).
 The aligned spectra will look like
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd_.png)
-![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd_1.png)
-![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd_-1.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd__1.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd__-1.png)
 .
 Repeating this procedure with compound 2a will result in 
 ```
@@ -180,8 +180,8 @@ sucess
 ```
 and the spectra
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd_.png)
-![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd_1.png)
-![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd_-1.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd__1.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd__-1.png)
 
 From the overlap metrics and the figures, it is clear that compound 2b is the compound which was measured.
 
