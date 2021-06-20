@@ -232,12 +232,15 @@ class Settings:
         self.sigma_2=0.1
         self.x_min=1000
         self.x_max=1500
+        self.w=12
     def get(self):
         return self.shift_factor, self.cutoff_absolute, self.cutoff, self.sigma_1, self.sigma_2, self.use_vcd, self.x_min, self.x_max
     def get_directory(self):
         return self.directory
+    def get_w(self):
+        return self.w
 ```
-```self.use_vcd=True``` refers to, whether VCD data should be used. ```self.shift_factor``` refers to the standard scaling performed (parameter mu in the original publication). For B3LYP/def2-TZVP, 0.98 is generally a good value. If this level of theory cannot be afforded, we suggest to switch to BP86/def2-TZVP. Here, ```self.shift_factor=1``` is generally a good value. We do not advise to reduce the quality of the basis set. ```self.cutoff_absolute``` asks, whether an absolute cutoff should be used or a relative cutoff should be used. ```self.cutoff=0.015``` refers to the value of cutoff (in this case, 1.5%. Use a very high value here to turn off this functionality). For  ```self.sigma_1``` and ```self.sigma_2```, see publications.         ```self.x_min=1000``` and ```self.x_max=1500``` refers to the region on which the fit should be performed.
+```self.use_vcd=True``` refers to, whether VCD data should be used. ```self.shift_factor``` refers to the standard scaling performed (parameter mu in the original publication). For B3LYP/def2-TZVP, 0.98 is generally a good value. If this level of theory cannot be afforded, we suggest to switch to BP86/def2-TZVP. Here, ```self.shift_factor=1``` is generally a good value. We do not advise to reduce the quality of the basis set. ```self.cutoff_absolute``` asks, whether an absolute cutoff should be used or a relative cutoff should be used. ```self.cutoff=0.015``` refers to the value of cutoff (in this case, 1.5%. Use a very high value here to turn off this functionality). For  ```self.sigma_1``` and ```self.sigma_2```, see publications.         ```self.x_min=1000``` and ```self.x_max=1500``` refers to the region on which the fit should be performed. ```self.w``` refers to the Lorentzbandwidth which is assumed at the stage of reconvolution.
  
 
 
