@@ -8,10 +8,11 @@ from scipy.interpolate import interp1d
 def Lorentzian(freq,inten):
     settings = Settings()
     s,cutoff_absolute,cutoff,sigma_1,sigma_2,use_vcd,x_min,x_max=settings.get()
+    w=settings.get_w()
     x=np.arange(x_min,x_max,1)
     list_append=[]
     for i in range(len(freq)):
-        t=((x-freq[i])/(12/2))**2
+        t=((x-freq[i])/(w/2))**2
         L=inten[i]/(1+t)
         list_append.append(L)
     list_append=np.asarray(list_append)
