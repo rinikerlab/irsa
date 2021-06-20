@@ -191,7 +191,7 @@ VCD spectrum compound 2b (black = experiment, red = aligned, orange = unshifted,
 
 From the overlap metrics and the figures, it is clear that compound 2b is the compound which was measured.
 
-##Short explanation of files ```Settings.py```
+## Short explanation of files ```Settings.py```
 The file ```Settings.py``` looks like
 ```
 class Settings:
