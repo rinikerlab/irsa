@@ -12,12 +12,12 @@ year={2019},
 doi = {10.1021/acs.jcim.8b00789}}  
 
 @article{Boeselt2020,
-title={Determination of Absolute Stereochemistry of Flexible Molecules Using a Vibrational Circular Dichroism (VCD) Spectra Alignment Algorithm},
+title={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm for Infrared Spectra,
 author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker},
 journal={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm forvInfrared Spectra},
-volume={xxx},
-number={xxx},
-pages={xxx},
+volume={92},
+number={13},
+pages={9124-9131},
 year={2020},
 doi = {10.1021/acs.analchem.0c01399}}  
 
