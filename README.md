@@ -105,7 +105,7 @@ class Settings:
         return self.directory
 ```
 .
-Most importantly is the variable ```self.directory```, which refers to the total path of the folder, where the files ```IR_theo.txt```,```vcd_theo.txt```, ```peaks_mod_theo.txt```,```peaks_mod_exp.txt```, ```peaks_mod_theo_vcd.txt```, ```peaks_mod_exp_vcd.txt``` and the experimental spectra ```VCD.txt``` and ```IR.txt``` are saved. Next, call ```python Main.py```.
+Most importantly is the variable ```self.directory```, which refers to the path of the folder, where the files ```IR_theo.txt```,```vcd_theo.txt```, ```peaks_mod_theo.txt```,```peaks_mod_exp.txt```, ```peaks_mod_theo_vcd.txt```, ```peaks_mod_exp_vcd.txt``` and the experimental spectra ```VCD.txt``` and ```IR.txt``` are saved. Next, call ```python Main.py```.
 This will output the png files ```1a_1_0.98_0.015_vcd__1.png```,```1a_1_0.98_0.015_vcd__-1.png```, and ```1b_0_0.98_0.015_vcd_.png```. The first spectrum belong to the aligned vcd spectrum of the provided diastereomer, the second file to the aligned vcd spectrum of the enatiomer, and the third file to the aligned IR spectrum. Black refers always to the experimental spectrum, red to the aligned spectrum, and orange to the unshifted, but by the shift-factor scaled spectrum. Further, it will output information of the alignment as
 ```
 VCD SPECTRUM AVAILABLE
