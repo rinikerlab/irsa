@@ -140,9 +140,12 @@ READ IN THEORETICAL SPECTRUM
 sucess
 ```
 , where the pearson number and spearman number refers to overlap metrics between the experimental and theoretical IR spectrum, as well as the experimental and theoretical VCD spectrum. The returnvalue refers to the score of the alignment. The -1 refers to the enantiomer of the provided compound (in this case, 1b).
-The aligned spectra will look like
+The aligned spectra will look like:
+IR spectrum compound 1a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_0_0.98_0.015_vcd_.png)
+VCD spectrum compound 1a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_1_0.98_0.015_vcd__1.png)
+VCD spectrum compound 1b (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/1a_1_0.98_0.015_vcd__-1.png)
 .
 Repeating this procedure with compound 2a will result in 
@@ -179,17 +182,36 @@ READ IN THEORETICAL SPECTRUM
 sucess
 ```
 and the spectra
+IR spectrum compound 2a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd_.png)
+VCD spectrum compound 2a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_1_0.98_0.015_vcd__1.png)
+VCD spectrum compound 2b (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_1_0.98_0.015_vcd__-1.png)
 
 From the overlap metrics and the figures, it is clear that compound 2b is the compound which was measured.
 
+##Short explanation of files ```Settings.py```
+The file ```Settings.py``` looks like
+```
+class Settings:
+    def __init__(self):
+        self.directory='1a'
+        self.use_vcd=True
 
-
-
-
-
+        self.shift_factor=0.98
+        self.cutoff_absolute=False
+        self.cutoff=0.015
+        self.sigma_1=0.192
+        self.sigma_2=0.1
+        self.x_min=1000
+        self.x_max=1500
+    def get(self):
+        return self.shift_factor, self.cutoff_absolute, self.cutoff, self.sigma_1, self.sigma_2, self.use_vcd, self.x_min, self.x_max
+    def get_directory(self):
+        return self.directory
+```
+```self.use_vcd=True``` refers to, whether VCD data should be used. ```self.shift_factor``` refers to the standard scaling performed. For B3LYP/def2-TZVP, 0.98 is generally a good value. If this level of theory cannot be afforded, we suggest to switch to BP86/def2-TZVP. Here, ```self.shift_factor=1``` is agood value. ```self.cutoff_absolute``` asks, whether an absolute cutoff should be used or a relative cutoff should be used. ```self.cutoff=0.015``` refers to the value of cutoff (in this case, 1.5%. Use a very high value here to turn off this functionality). For  ```self.sigma_1``` and ```self.sigma_2```, see publications.         ```self.x_min=1000``` and ```self.x_max=1500``` refers to the region on which the fit should be performed.
  
 
 
