@@ -207,7 +207,7 @@ sucess
 ```
 and the spectra
 IR spectrum compound 2a (black = experiment, red = aligned, orange = unshifted, but scaled)
-![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd_.png)
+![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_0_0.98_0.015_vcd__1.png)
 VCD spectrum compound 2a (black = experiment, red = aligned, orange = unshifted, but scaled)
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Tutorial/2a_1_0.98_0.015_vcd__1.png)
 IR spectrum compound 2b (black = experiment, red = aligned, orange = unshifted, but scaled)
