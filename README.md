@@ -6,7 +6,7 @@ We implemented the algorithm, such that it works with the convoluted theoretical
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Diastereomeric_pair.png)
 
 
-Consider the diastereomeric pair 1a and 2a, where we measured the experimental IR and VCD spectrum to determine the relative stereochemistry and the absolute stereochemistry. We will refer to the enantiomer of 1a as 1b, and to the enantiomer of 2a as 2b.
+Consider the diastereomeric pair 1a and 2a, where we measured the experimental IR and VCD spectrum to determine the relative stereochemistry and the absolute stereochemistry. We will refer to the enantiomer of 1a as 1b, and to the enantiomer of 2a as 2b. All files can be found in the folder Tutorial.
 First, we generate the conformational ensemble using RDKit.
 The isomeric SMILES string for compound 1a is
 O[C@]1([H])[C@](C)(C2(C)C)CC[C@H]2C1
@@ -40,7 +40,7 @@ python create.py
 ```
 . This will generate n xyz-files, one for each conformer found.
 For each conformer, prepare a computational input file. We will use gaussian, version 09D.
-For compound 1a, this may look like
+For compound 1a (one conformer found), this may look like
 ```
 %mem=16000MB
 %NProcShared=16
@@ -191,7 +191,7 @@ VCD spectrum compound 2b (black = experiment, red = aligned, orange = unshifted,
 
 From the overlap metrics and the figures, it is clear that compound 2b is the compound which was measured.
 
-## Short explanation of files ```Settings.py```
+## Short explanation of file ```Settings.py```
 The file ```Settings.py``` looks like
 ```
 class Settings:
@@ -211,7 +211,7 @@ class Settings:
     def get_directory(self):
         return self.directory
 ```
-```self.use_vcd=True``` refers to, whether VCD data should be used. ```self.shift_factor``` refers to the standard scaling performed. For B3LYP/def2-TZVP, 0.98 is generally a good value. If this level of theory cannot be afforded, we suggest to switch to BP86/def2-TZVP. Here, ```self.shift_factor=1``` is agood value. ```self.cutoff_absolute``` asks, whether an absolute cutoff should be used or a relative cutoff should be used. ```self.cutoff=0.015``` refers to the value of cutoff (in this case, 1.5%. Use a very high value here to turn off this functionality). For  ```self.sigma_1``` and ```self.sigma_2```, see publications.         ```self.x_min=1000``` and ```self.x_max=1500``` refers to the region on which the fit should be performed.
+```self.use_vcd=True``` refers to, whether VCD data should be used. ```self.shift_factor``` refers to the standard scaling performed (parameter mu in the original publication). For B3LYP/def2-TZVP, 0.98 is generally a good value. If this level of theory cannot be afforded, we suggest to switch to BP86/def2-TZVP. Here, ```self.shift_factor=1``` is generally a good value. We do not advise to reduce the quality of the basis set. ```self.cutoff_absolute``` asks, whether an absolute cutoff should be used or a relative cutoff should be used. ```self.cutoff=0.015``` refers to the value of cutoff (in this case, 1.5%. Use a very high value here to turn off this functionality). For  ```self.sigma_1``` and ```self.sigma_2```, see publications.         ```self.x_min=1000``` and ```self.x_max=1500``` refers to the region on which the fit should be performed.
  
 
 
