@@ -11,15 +11,8 @@ pages={1826-1838},
 year={2019},
 doi = {10.1021/acs.jcim.8b00789}}  
 
-@article{Boeselt2020,
-title={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm for Infrared Spectra,
-author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker},
-journal={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm forvInfrared Spectra},
-volume={92},
-number={13},
-pages={9124-9131},
-year={2020},
-doi = {10.1021/acs.analchem.0c01399}}  
+@article{Boeselt2020, author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker}, title={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm for Infrared Spectra}, journal={Anal. Chem.}, volume={92}, number={13}, pages={9124-9131}, year={2020}, doi = {10.1021/acs.analchem.0c01399}}
+
 
 We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial. For question, please write
 Lennard.Boeselt@phys.chem.ethz.ch
@@ -264,8 +257,7 @@ pages={1826-1838},
 year={2019},
 doi = {10.1021/acs.jcim.8b00789}}  
 
-@article{Boeselt2020, title={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm for Infrared Spectra, author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker}, journal={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm forvInfrared Spectra}, volume={92}, number={13}, pages={9124-9131}, year={2020}, doi = {10.1021/acs.analchem.0c01399}}
-
+@article{Boeselt2020, author={L. Boeselt and R. Doetzer and S. Steiner and M. Stritzinger and S. Salzmann and S. Riniker}, title={Determining the Regiochemistry and Relative Stereochemistry of Small and Druglike Molecules Using an Alignment Algorithm for Infrared Spectra}, journal={Anal. Chem.}, volume={92}, number={13}, pages={9124-9131}, year={2020}, doi = {10.1021/acs.analchem.0c01399}}
 
 and cite the paper where you got the data from.
 
