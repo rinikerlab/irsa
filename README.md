@@ -1,3 +1,13 @@
+The newest version of IRSA is published in form of a google colab file (see IRSA_COLAB.ipynb).
+The changes are discussed in
+
+@article{Boeselt2021,
+title={Improving the IR Spectra Alignment Algorithm with Spectra Deconvolution and Combination with Raman or VCD Spectroscopy},
+author={L. Boeselt and R. Aerts and W. Herrebout and S. Riniker},
+journal={submitted}}
+
+
+
 ## Version Beta 0.2
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 
