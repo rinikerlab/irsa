@@ -1,4 +1,5 @@
-The newest version of IRSA is published in form of a google colab file (see IRSA_COLAB.ipynb).
+The newest version of IRSA is published in form of a google colab file (see IRSA_COLAB.ipynb)
+https://colab.research.google.com/github/rinikerlab/irsa/blob/master/IRSA_COLAB.ipynb
 The changes are discussed in
 
 @article{Boeselt2021,
