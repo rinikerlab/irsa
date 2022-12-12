@@ -17,6 +17,8 @@ The directory `examples` includes two folders with jupyter notebooks and sample
 data demonstrating how to use the code to reproduce the isopulegol analysis from
 the paper.
 
+For question, please write
+sriniker@ethz.ch
 
 ## Version Beta 0.2
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
@@ -35,7 +37,7 @@ doi = {10.1021/acs.jcim.8b00789}}
 
 
 We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial. For question, please write
-Lennard.Boeselt@phys.chem.ethz.ch
+sriniker@ethz.ch
 
 ## Test case
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Diastereomeric_pair.png)
@@ -263,7 +265,7 @@ class Settings:
 We fixed a part in the Boltzmann weighting
 This side is still under construction
 Please send requests and Bug reports to
-Lennard.Boeselt@phys.chem.ethz.ch
+sriniker@ethz.ch
 
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 
