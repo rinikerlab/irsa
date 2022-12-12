@@ -1,13 +1,24 @@
-The newest version of IRSA is published in form of a google colab file (see IRSA_COLAB.ipynb)
-https://colab.research.google.com/github/rinikerlab/irsa/blob/master/IRSA_COLAB.ipynb
-The changes are discussed in
+## Version 2022.12.1
 
-@article{Boeselt2021,
-title={Improving the IR Spectra Alignment Algorithm with Spectra Deconvolution and Combination with Raman or VCD Spectroscopy},
+The directory `irsa` contains the version of IRSA corresponding to the
+publication:
+
+@article{Boeselt2022, title={Improving the IR Spectra Alignment Algorithm with
+Spectra Deconvolution and Combination with Raman or VCD Spectroscopy},
 author={L. Boeselt and R. Aerts and W. Herrebout and S. Riniker},
 journal={submitted}}
 
+To install it locally you can run:
+```
+python setup.py install
+```
 
+The directory `examples` includes two folders with jupyter notebooks and sample
+data demonstrating how to use the code to reproduce the isopulegol analysis from
+the paper.
+
+For question, please write
+sriniker@ethz.ch
 
 ## Version Beta 0.2
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
@@ -26,7 +37,7 @@ doi = {10.1021/acs.jcim.8b00789}}
 
 
 We implemented the algorithm, such that it works with the convoluted theoretical spectra, instead of the output of the QM software packages. It is recommended to use this code instead of the previous implementation. It follows a short tutorial. For question, please write
-Lennard.Boeselt@phys.chem.ethz.ch
+sriniker@ethz.ch
 
 ## Test case
 ![alt text](https://github.com/rinikerlab/irsa/blob/master/Diastereomeric_pair.png)
@@ -254,7 +265,7 @@ class Settings:
 We fixed a part in the Boltzmann weighting
 This side is still under construction
 Please send requests and Bug reports to
-Lennard.Boeselt@phys.chem.ethz.ch
+sriniker@ethz.ch
 
 If you use the algorithm or experimental data from this side and report your results, we would kindly ask you to cite
 

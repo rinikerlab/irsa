@@ -1,0 +1,10 @@
+pandas
+pydantic
+numpy
+scipy
+matplotlib
+scikit-learn
+setuptools
+plotly
+lmfit==1.0.3
+pytest
