@@ -1,12 +1,21 @@
-The newest version of IRSA is published in form of a google colab file (see IRSA_COLAB.ipynb)
-https://colab.research.google.com/github/rinikerlab/irsa/blob/master/IRSA_COLAB.ipynb
-The changes are discussed in
+## Version 2022.12.1
 
-@article{Boeselt2021,
-title={Improving the IR Spectra Alignment Algorithm with Spectra Deconvolution and Combination with Raman or VCD Spectroscopy},
+The directory `irsa` contains the version of IRSA corresponding to the
+publication:
+
+@article{Boeselt2022, title={Improving the IR Spectra Alignment Algorithm with
+Spectra Deconvolution and Combination with Raman or VCD Spectroscopy},
 author={L. Boeselt and R. Aerts and W. Herrebout and S. Riniker},
 journal={submitted}}
 
+To install it locally you can run:
+```
+python setup.py install
+```
+
+The directory `examples` includes two folders with jupyter notebooks and sample
+data demonstrating how to use the code to reproduce the isopulegol analysis from
+the paper.
 
 
 ## Version Beta 0.2
