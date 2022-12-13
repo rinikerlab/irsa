@@ -12,6 +12,9 @@ To install it locally you can run:
 ```
 python setup.py install
 ```
+Note that the results in the paper were generated with v1.0.3 of the lmfit package. 
+We have noticed small changes in the results with different lmfit versions, so if you 
+wish to reproduce the results from the the paper, please use v1.0.3.
 
 The directory `examples` includes two folders with jupyter notebooks and sample
 data demonstrating how to use the code to reproduce the isopulegol analysis from
