@@ -112,6 +112,30 @@ def voigt(freqs: np.array,
     y_axis = np.sum(list_append, axis=0)
     return x_axis, y_axis
 
+def _get_index_for_peak(peaks_on_x_axis: np.array, 
+                        x_dimension_of_spectrum: np.array) -> np.array:
+    """Helper function to get peak indices.
+
+    Args:
+        peaks_on_x_axis (np.array): Provided x dimension of peaks.
+        x_dimension_of_spectrum (np.array): x axis of the spectrum.
+
+    Raises:
+        ValueError: (min) If the provided peaks are out of scope.
+        ValueError: (max) If the provided peaks are out of scope.
+
+    Returns:
+        np.array: indices of the peak.
+    """
+
+    if np.min(peaks_on_x_axis) < np.min(x_dimension_of_spectrum):
+        raise ValueError("The lowest provided peak is out of scope")
+    if np.max(peaks_on_x_axis) > np.max(x_dimension_of_spectrum):
+        raise ValueError("The highest provided peak is out of scope")
+    distances_between_peaks = np.abs(peaks_on_x_axis[:, np.newaxis] - x_dimension_of_spectrum[np.newaxis, :])
+    
+    return np.argmin(distances_between_peaks, axis=0)
+
 
 def deconvolute(spectrum: np.array,
                 working_dir: str = WORKING_DIR,
@@ -119,7 +143,8 @@ def deconvolute(spectrum: np.array,
                 normalize: bool = False,
                 lower: float = 1000,
                 higher: float = 1800,
-                vcd: bool = False) -> None:
+                vcd: bool = False,
+                peaks_on_x_axis: np.array = None) -> None:
     """Deconvolutes the spectrum, and saves the information in the text file {save_data}.
 
     Args:
@@ -130,19 +155,24 @@ def deconvolute(spectrum: np.array,
         lower (float, optional): Lower bound of the spectrum to be considered. Defaults to 1000.
         higher (float, optional): Upper bound of the spectrum to be considered. Defaults to 1800.
         vcd (bool, optional): Whether the data is a VCD spectrum. Defaults to False.
+        peaks_on_x_axis (np.array, optional): Provide manuall selected x peaks.
     """
     if normalize:
         idx = (spectrum[:, 0] > lower) & (spectrum[:, 0] < higher)
         spectrum[:, 1] = spectrum[:, 1] / np.max(np.abs(spectrum[idx, 1]))
         spectrum = spectrum[idx]
+    if peaks_on_x_axis is None:
+        ind_ir, _ = scipy.signal.find_peaks(spectrum[:, 1])
+        if vcd:
+            ind_ir = []
+            for i in range(1, len(spectrum) - 1):
+                if abs(spectrum[i - 1, 1]) < abs(spectrum[i, 1]) > abs(spectrum[i + 1, 1]) and abs(spectrum[i, 1]) > 0.03:
+                    ind_ir.append(i)
+            ind_ir = np.asarray(ind_ir)
+    else:
+        ind_ir = _get_index_for_peak(peaks_on_x_axis=peaks_on_x_axis,
+                                     x_dimension_of_spectrum=spectrum[:, 0])
 
-    ind_ir, _ = scipy.signal.find_peaks(spectrum[:, 1])
-    if vcd:
-        ind_ir = []
-        for i in range(1, len(spectrum) - 1):
-            if abs(spectrum[i - 1, 1]) < abs(spectrum[i, 1]) > abs(spectrum[i + 1, 1]) and abs(spectrum[i, 1]) > 0.03:
-                ind_ir.append(i)
-        ind_ir = np.asarray(ind_ir)
     peaks = spectrum[ind_ir]
     params, model, write_state = None, None, []
     for i in range(0, len(peaks)):
