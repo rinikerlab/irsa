@@ -1,0 +1,8 @@
+"""constants defined for the code"""
+
+
+HARTREE_TO_KJMOL = 2625.4996394799
+R_KJ = 0.008314
+TEMPERATURE = 298.15
+RT = R_KJ * TEMPERATURE
+OMEGA = True
